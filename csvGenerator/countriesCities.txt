@@ -1,0 +1,7 @@
+California- Anaheim, Chico, Beverly Hills, Buena Park, Santa Ana, Hollywood
+Florida- Batow, Daytona Beach, Panama City, Miami, Orlando, Venice
+Hawaii- Hanalei, Honolulu, Kahului, Kappa, Laie, Wahiawa
+Nevada- Boulder City, Carson City, Genoa, Las Vegas, Reno, Sparks
+Texas- Beaumont, Dallas, El Paso, Fort Worth, Pasadena, Temple
+Utah- Brigham City, Cedar City, Clearfield, Delta, Fillmore, Salt Lake City
+Washington: Auburn, Belleveu, Everett, Port Angeles, Seattle, Tacoma
