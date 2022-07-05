@@ -5,3 +5,12 @@ Nevada- Boulder City, Carson City, Genoa, Las Vegas, Reno, Sparks
 Texas- Beaumont, Dallas, El Paso, Fort Worth, Pasadena, Temple
 Utah- Brigham City, Cedar City, Clearfield, Delta, Fillmore, Salt Lake City
 Washington: Auburn, Belleveu, Everett, Port Angeles, Seattle, Tacoma
+
+
+
+Germany- Berlin, Colgne, Dresden, Munich, Frankfurt, Stuttgart
+Italy- Rome, Naples, Milan, Florence, Bologna, Venice 
+France- Paris, Bordeaux, Toulouse, Nice, Lyon, Nantes
+Spain- Barcelona, Madrid, Seville, Majorca, Ibiza, Valencia
+England- London, Edinburgh, Manchester, Birmingham, Glasgow, Liverpool
+USA - Hollywood, Miami, Las Vegas, Dallas, New York City, Seattle 
