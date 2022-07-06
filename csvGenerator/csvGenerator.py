@@ -1,5 +1,18 @@
 from csv import writer
 import random
+import time
+
+def str_time_prop(start, end, time_format, prop):
+    stime = time.mktime(time.strptime(start, time_format))
+    etime = time.mktime(time.strptime(end, time_format))
+
+    ptime = stime + prop * (etime - stime)
+
+    return time.strftime(time_format, time.localtime(ptime))
+
+
+def random_date(start, end, prop):
+    return str_time_prop(start, end, '%m/%d/%Y %I:%M %p', prop)
 
 def appendRow(file_name, list_of_elem):
     with open(file_name, 'a+', newline='') as write_obj:
@@ -32,12 +45,16 @@ def getinputs(num):
 
         customerName = random.choice(fullNames)
         productCategory = random.choice(productCategories)
-        productName = random.choice(products[productCategory])
+        productName = random.choice(products[productCategory][:int(len(products[productCategory]) / 3)])
         paymentType = random.choice(paymentTypes)
         country = random.choice(countriesList)
         city = random.choice(countries[country])
         websiteName = random.choice(websites)
         transactionSuccess = 'Y'
+        quantityRange = products[productCategory][products[productCategory].index(productName) + (2 * int(len(products[productCategory]) / 3))]
+        quantity = random.randint(quantityRange[0], quantityRange[1])
+        price = products[productCategory][products[productCategory].index(productName) + (int(len(products[productCategory]) / 3))] * quantity
+
 
         if random.uniform(0, 1) < 0.05:
             transactionSuccess = 'N'
@@ -46,14 +63,13 @@ def getinputs(num):
         inputList.append(i)
         inputList.append(fullNames.index(customerName) + 100)
         inputList.append(customerName)
-        print(products[productCategory])
         inputList.append(1000 + (100 * productCategories.index(productCategory)) + (products[productCategory].index(productName)))
         inputList.append(productName)
         inputList.append(productCategory)
         inputList.append(paymentType)
-        # inputList.append(quantity)
-        # inputList.append(price)
-        # inputList.append(datetime)
+        inputList.append(quantity)
+        inputList.append("{:0.2f}".format(price))
+        inputList.append(random_date("1/1/2017 12:00 AM", "1/1/2022 11:59 PM", random.random()))
         inputList.append(country)
         inputList.append(city)
         inputList.append(websiteName)
@@ -74,15 +90,15 @@ def getinputs(num):
 
 paymentTypes = ["Card", "Internet Banking", "UPI", "Wallet"]
 
-products = {"Bodywash": ["Axe", "Old Spice", "Dove", "CeraVe", "Nivea", "Olay"],
-            "Shampoos/Conditioners": ["Garnier", "Suave", "Herbal essences", "Dove", "TRESemme", "Head & Shoulders"],
-            "Toothpaste": ["Colgate", "Crest", "Advance White", "Sensodyne", "Biotene", "Parodontax"],
-            "Mouthwash": ["Listerine", "Act", "Peridex", "TheraBreath"],
-            "Cars/Trucks": ["Ford", "Dodge", "Kia", "Hundai", "Volkswagen", "Nissan"],
-            "Clothing": ["Levi", "Abercrombie & Fitch", "Nike", "Gucci", "H&M", "Michael Kors"],
-            "Perfume/Cologne": ["Hugo Boss", "Versace", "Dolce & Gabbana", "Calvin Klein", "Christian Dior", "Mont Blanc"],
-            "Cellular Devices": ["iPhone", "Samsung", "Huawei", "Motorola", "Nokia"],
-            "Computers": ["Apple", "Dell", "HP", "Sony", "Acer"]}
+products = {"Bodywash": ["Axe", "Old Spice", "Dove", "CeraVe", "Nivea", "Olay", 4.97, 8.29, 6.99, 11.99, 8.79, 8.99, [4, 12], [4, 12], [4, 12], [4, 12], [4, 12], [4, 12]],
+            "Shampoos/Conditioners": ["Garnier", "Suave", "Herbal Essences", "Dove", "TRESemme", "Head & Shoulders", 4.99, 4.99, 6.79, 7.99, 6.29, 5.99, [4, 12], [4, 12], [4, 12], [4, 12], [4, 12], [4, 12]],
+            "Toothpaste": ["Colgate", "Crest", "Advance White", "Sensodyne", "Biotene", "Parodontax", 1.97, 2.33, 2.67, 5.99, 6.59, 8.69, [6, 20], [6, 25], [4, 15], [4, 30], [4, 12], [2, 15]],
+            "Mouthwash": ["Listerine", "Act", "Peridex", "TheraBreath", 3.89, 4.79, 5.45, 6.67, [4, 15], [4, 30], [4, 12], [2, 15]],
+            "Cars/Trucks": ["Ford", "Dodge", "Kia", "Hundai", "Volkswagen", "Nissan", 40000.00, 37564.99, 22590.00, 28150.00, 23128.00, 45030.00, [1, 7], [1, 9], [1, 8], [1, 12], [1, 12], [1, 6]],
+            "Clothing": ["Levi", "Abercrombie & Fitch", "Nike", "Gucci", "H&M", "Michael Kors", 33.99, 44.99, 52.99, 350.99, 70.89, 120.99, [3, 7], [2, 10], [2, 15], [1, 5], [1, 8], [1, 12]],
+            "Perfume/Cologne": ["Hugo Boss", "Versace", "Dolce & Gabbana", "Calvin Klein", "Christian Dior", "Mont Blanc", 42.99, 51.65, 46.99, 55.99, 118.99, 52.11, [2, 9], [2, 15], [3, 14], [2, 12], [1, 11], [4, 12]],
+            "Cellular Devices": ["iPhone", "Samsung", "Huawei", "Motorola", "Nokia", 999.99, 799.99, 975.99, 579.99, 129.89, [4, 25], [3, 19], [4, 23], [4, 12], [2, 15]],
+            "Computers": ["Apple", "Dell", "HP", "Sony", "Acer", 1599.99, 499.99, 499.99, 1105.00, 529.99, [4, 25], [3, 19], [4, 23], [4, 12], [2, 15]]}
 
 countries = {"Germany": ["Berlin", "Colgne", "Dresden", "Munich", "Frankfurt", "Stuttgart"],
              "Italy": ["Rome", "Naples", "Milan", "Florence", "Bologna", "Venice"],
@@ -91,5 +107,5 @@ countries = {"Germany": ["Berlin", "Colgne", "Dresden", "Munich", "Frankfurt", "
              "England": ["London", "Edinburgh", "Manchester", "Birmingham", "Glasgow", "Liverpool"],
              "USA": ["Hollywood", "Miami", "Las Vegas", "Dallas", "New York City", "Seattle"]}
 
-getinputs(10)
+getinputs(10000)
 
