@@ -6,13 +6,11 @@ from spark_functions import *
 spark = SparkSession.builder.getOrCreate()
 
 # This is for taking a CSV as an input and returning a spark Dataframe
-def dataFrameCreation():
-    data = pd.read_csv("csvGenerator/data.csv")
-    spark_df = spark.createDataFrame(data)
-    return spark_df
+data = pd.read_csv("csvGenerator/data.csv")
+spark_df = spark.createDataFrame(data)
+
     
 
-dataFrameCreation()
 
 
 def queryOptions():
