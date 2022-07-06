@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
 import pandas as pd
-
+from spark_functions import *
 
 #This builds the spark session 
 spark = SparkSession.builder.getOrCreate()
@@ -15,9 +15,5 @@ def dataFrameCreation():
 dataFrameCreation()
 
 
-def query():
+def queryOptions():
     pass
-
-def plot():
-    pass
-
