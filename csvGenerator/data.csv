@@ -1,3 +1,4 @@
+orderID,customerID,customerName,productID,productName,productCategory,paymentType,quantity,price,datetime,country,city,website,transactionID,transactionSuccess,failureReason
 1,145,Conner Rodriguez,1200,Colgate,Toothpaste,Card,7,13.79,07/07/2018 07:49 PM,Spain,Barcelona,www.craigslist.com,10001,Y, 
 2,135,Karter Martinez,1301,Act,Mouthwash,Internet Banking,9,43.11,04/05/2019 05:30 AM,Spain,Valencia,www.amazon.com,10002,Y, 
 3,108,Frederick Williams,1802,HP,Computers,Internet Banking,8,3999.92,06/26/2019 11:53 PM,Italy,Rome,www.walmart.com,10003,Y, 
