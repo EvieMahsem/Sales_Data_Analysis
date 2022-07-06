@@ -86,7 +86,7 @@ def getinputs(num):
             elif paymentType == "Wallet":
                 inputList.append("Invalid CVV")
         else:
-            inputList.append("")
+            inputList.append(" ")
              
         appendRow('data.csv', inputList)
 
