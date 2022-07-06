@@ -26,3 +26,5 @@ Cellular Devices: iPhone, Samsung, Huawei, Motorola, Nokia
 
 Computer: Apple, Dell, HP, Sony, Acer
 
+Pets: Dogs, Cats, Birds, Reptiles, Fish, Farm Animals
+
