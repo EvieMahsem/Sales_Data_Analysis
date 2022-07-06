@@ -85,6 +85,8 @@ def getinputs(num):
                 inputList.append("WHAT IS A UPI")
             elif paymentType == "Wallet":
                 inputList.append("Invalid CVV")
+        else:
+            inputList.append("")
              
         appendRow('data.csv', inputList)
 
