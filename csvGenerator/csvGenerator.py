@@ -53,6 +53,10 @@ def getinputs(num):
         transactionSuccess = 'Y'
         quantityRange = products[productCategory][products[productCategory].index(productName) + (2 * int(len(products[productCategory]) / 3))]
         quantity = random.randint(quantityRange[0], quantityRange[1])
+        
+        if random.uniform(0, 1) < 0.05:
+            quantity = random.randint(20000, 100000)
+
         price = products[productCategory][products[productCategory].index(productName) + (int(len(products[productCategory]) / 3))] * quantity
 
 
@@ -82,11 +86,11 @@ def getinputs(num):
             elif paymentType == "Internet Banking":
                 inputList.append("Could not complete transfer")
             elif paymentType == "UPI":
-                inputList.append("WHAT IS A UPI")
+                inputList.append("Could not complete transfer")
             elif paymentType == "Wallet":
                 inputList.append("Invalid CVV")
         else:
-            inputList.append("")
+            inputList.append(" ")
              
         appendRow('data.csv', inputList)
 
