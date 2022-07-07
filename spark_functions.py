@@ -1,10 +1,8 @@
 
 
 class SparkQuerrying():
-    def __init__(self,df,whereQ,groupQ,colInput):
+    def __init__(self,df,colInput):
         self.df = df
-        self.whereQ = whereQ
-        self.groupQ = groupQ
         self.colInput = colInput
 
     def SelectWhereGBy(self,whereCon,groupByVar,aggColnName,aggType):
