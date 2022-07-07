@@ -62,4 +62,4 @@ class DataAnalysis(SparkQuerrying):
 
 # whereQ = input("Would you like to add an conditional (yes/no): ")
 # groupQ = input("Would you like to group data (yes/no): ")
-# x = SparkQuerrying(spark_df).Select(spark_df,whereQ,groupQ,colInput)
+# x = SparkQuerrying(spark_df,whereQ,groupQ,colInput).Select(spark_df,whereQ,groupQ,colInput)
