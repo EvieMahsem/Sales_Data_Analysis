@@ -1,31 +1,29 @@
-def insert_stuff():
-    while True:
-        print("In this portion ...")
-        print("\t1. To go here")
-        print("\t2. To go there")
-        print("\t3. To go back to the main menu.")
-        while True:
-            try:
-                lel= int(input("\nSelection: "))
-            except ValueError:
-                print(ValueError)
-                print("Please make a proper selection.")
-            else:
-                break
-        if lel == 1:
-            pass
-        elif lel == 2:
-            pass
-        elif lel == 3:
-            break
+from pyspark.sql import SparkSession
+import pandas as pd
+from spark_functions import SparkQuerrying
 
+def insert_query():
+    while True:
+        print("This is the querying portion of the program.")
+        print("\t1. Do a Where statment AND a Group By")
+        print("\t2. Do a Where statment AND NO group By")
+        print("\t3. Do just a Group By") 
+        print("\t4. Just the normal select statment")
+        print("\t5. To return to the main menu")
+        lel = int(input("Please make a selection: "))
+        while lel != 5:
+            if lel == 1:
+                print(lel)
+            elif lel == 5:
+                break
 
 def Startup ():
     while True:
         print("Hello!")
         print("\t1. ")
-        print("\t2. ")
-        print("\t3. To close out the program.")
+        print("\t2. To make a query.")
+        print("\t3. Stuff")
+        print("\t4. To close out the program.")
         while True:
             try:
                 sel = int(input("\nSelection: "))
@@ -35,10 +33,12 @@ def Startup ():
             else:
                 break
         if sel == 1:
-            insert_stuff()
+            pass
         elif sel == 2:
-            insert_mstuff()
-        elif sel == 3:
+            insert_query()
+        elif sel==3:
+            pass
+        elif sel == 4:
             disfile = open('newFile.txt', 'w')
             disfile.write(' ')
             disfile.close()
