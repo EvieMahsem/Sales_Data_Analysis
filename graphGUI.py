@@ -226,8 +226,16 @@ def productPopYearCity():
     popEntry1.pack()
     popButton.pack()
 
+def totalSalesTime():
+    for widget in displayFrame.winfo_children():
+        widget.destroy()
 
-def showScatterGraph(queryInput, title, addDate=False): 
+    showScatterGraph(querriesGui.totalSalesTime(), "Total Sales By Time", addTime=True)
+
+    
+
+
+def showScatterGraph(queryInput, title, addDate=False, addTime=False): 
 
     for widget in displayFrame.winfo_children():
         widget.destroy()
@@ -236,21 +244,43 @@ def showScatterGraph(queryInput, title, addDate=False):
 
     x, y = queryInput
 
+
     if addDate:
         for i in range(len(x)):
             x[i] = str(x[i]) + '/2021'
 
+        newx = ['01/2021', '02/2021', '03/2021', '04/2021', '05/2021', '06/2021', '07/2021', '08/2021', '09/2021', '10/2021', '11/2021', '12/2021']
+        newy = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+        for i in x:
+            newy[newx.index(i)] = y[x.index(i)]
+    
+    if addTime:
+        newx = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', 
+                '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
+        newy = [0 for i in range(24)]
+
+        for i in range(len(x)):
+            for q in range(len(newx)):
+                if str(x[i]) == newx[q][:2]:
+                    newy[q] = y[i]
+
+        
   
     # adding the subplot
     plot1 = fig.add_subplot(111)
   
     # plotting the graph
-    plot1.plot(x, y)
+    plot1.plot(newx, newy)
   
     # creating the Tkinter canvas
     # containing the Matplotlib figure
     fig.suptitle(title, fontsize=20)
-    plt.setp(plot1.get_xticklabels(), rotation=30, horizontalalignment='right')
+    if addTime:
+        plt.setp(plot1.get_xticklabels(), rotation=90, horizontalalignment='right')
+    else:
+        plt.setp(plot1.get_xticklabels(), rotation=30, horizontalalignment='right')
+
 
     canvas = FigureCanvasTkAgg(fig,
                                master = displayFrame)  
@@ -461,6 +491,18 @@ def startWindow():
                     bg="blue",
                     fg="yellow",
                     command= lambda: productPopYearCity()
+                    )
+    plotButton11.pack()
+
+    plotButton11 = tk.Button(
+                    master=buttonFrame,
+                    text="Total Sales by Time",
+                    width=25,
+                    height=2,
+                    pady=5,
+                    bg="blue",
+                    fg="yellow",
+                    command= lambda: totalSalesTime()
                     )
     plotButton11.pack()
 
