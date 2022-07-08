@@ -1,7 +1,9 @@
+from pyparsing import col
 from pyspark.sql import SparkSession
 import pandas as pd
-from spark_functions import SparkQuerrying
+from spark_functions import *
 import graphGUI
+from termcolor import colored
 
 spark = SparkSession.builder.getOrCreate()
 data = pd.read_csv("csvGenerator/data.csv")
@@ -9,62 +11,64 @@ spark_df = spark.createDataFrame(data)
 
 
 def insert_query():
+    colInput = columnGen(spark_df)
+    obj = SparkQuerrying(spark_df,colInput)
     while True:
-        print("\t1. To do a Where statment AND a Group By")
-        print("\t2. To do a Where statment AND NO group By")
-        print("\t3. To do a select statement with just a Group By") 
-        print("\t4. A select statement without a where or group by")
-        print("\t5. To return to the main menu")
-        lel = int(input("Please make a selection: "))
+        print(colored("What would you like to do?", 'magenta'))
+        print(colored("""\t1. To do a Where statment AND a Group By
+\t2. To do a Where statment AND NO group By
+\t3. To do a select statement with just a Group By        
+\t4. A select statement without a where or group by        
+\t5. To return to the main menu        
+        """,'cyan'))
+        lel = int(input(colored("Please make a selection: ",'magenta')))
         if lel == 5:
             break
-        print("How many columns do you want to select?")
-        print(f"The columns you can select are: {spark_df.columns}")
-        colInput = input("Please list the columns you would like: ").split(',')
-        obj = SparkQuerrying(spark_df,colInput) 
-        aggreagteFunctions = ['count','max','min','first','last', 'mean','sum']
-    
+
         if lel == 1:
-            print(colInput)
-            print("What is the conditional you would like to use? For example: orderID > 10 ")
-            whereCon = input("Please input: ")
-            print("What column do you want to group by?", colInput)
-            groupByVar = input("Please input: ")
-            keys = input("Please input the column names you want to aggregate: ").split(',')
-            print(aggreagteFunctions)
-            values = input("Please input the functions you would like to use: ").split(',')
+            aggreagteFunctions = ['count','max','min','first','last', 'mean','sum']
+            print(colored(colInput,'yellow'))
+            print(colored("What is the conditional you would like to use? For example: orderID > 10 ",'cyan'))
+            whereCon = input(colored("Please input: ",'magenta'))
+            print("What column do you want to group by?", colored(colInput,'yellow'))
+            groupByVar = input(colored("Please input: ",'magenta'))
+            keys = input(colored("Please input the column names you want to aggregate: ",'magenta')).split(',')
+            print(colored(aggreagteFunctions,'yellow'))
+            values = input(colored("Please input the functions you would like to use: ",'magenta')).split(',')
             obj.SelectWhereGBy(whereCon,groupByVar,keys,values)
         elif lel == 2:
-            print(colInput)
-            print("What is the conditional you would like to use? For example: orderID > 10 ")
-            whereCon = input("Please input: ")
+            print(colored(colInput,'yellow'))
+            print(colored("What is the conditional you would like to use? For example: orderID > 10 ",'cyan'))
+            whereCon = input(colored("Please input: ",'magenta'))
             obj.SelectWhere(whereCon)                    
         elif lel == 3:
-            print(colInput)
-            print("What column do you want to group by?", colInput)
-            groupByVar = input("Please input: ")
-            keys = input("Please input the column names you want to aggreagte: ").split(',')
-            print(aggreagteFunctions)
-            values = input("Please input the functions you would like to use: ").split(',')
+            aggreagteFunctions = ['count','max','min','first','last', 'mean','sum']
+            print(colored(colInput,'yellow'))
+            print("What column do you want to group by?", colored(colInput,'yellow'))
+            groupByVar = input(colored("Please input: ",'magenta'))
+            keys = input(colored("Please input the column names you want to aggregate: ",'magenta')).split(',')
+            print(colored(aggreagteFunctions,'yellow'))
+            values = input(colored("Please input the functions you would like to use: ",'magenta')).split(',')
             obj.SelectGBy(groupByVar,keys,values)
         elif lel == 4:
-            print(colInput)
-            obj.Select(colInput)
+            print(colored(colInput,'yellow'))
+            obj.Select()
         else:
-            print("Please make a valid input.")
+            print(colored("Please input a vaild number!",'red'))
 
 def Startup ():
     while True:
-        print("Hello, and welcome to the simulation.")
-        print("\t1. To open visualization menu.")
-        print("\t2. To make a query.")
-        print("\t3. To close out the program.")
+        print(colored("Hello, and welcome to the simulation.", 'magenta'))
+        print(colored("""\t1. To open visualization menu.
+\t2. To make a query.
+\t3. To close out the program.       
+        """,'cyan'))
         while True:
             try:
-                sel = int(input("\nSelection: "))
+                sel = int(input(colored("Selection: ",'magenta')))
             except (ValueError):
-                print("ValueError")
-                print("Please make a valid input.")
+                print(colored("ValueError",'red'))
+                print(colored("Please make a valid input.",'red'))
             else:
                 break
         if sel == 1:
@@ -72,9 +76,6 @@ def Startup ():
         elif sel == 2:
             insert_query()
         elif sel == 3:
-            disfile = open('newFile.txt', 'w')
-            disfile.write(' ')
-            disfile.close()
             print("Alright, catch ya later then.")
             break
         else:
