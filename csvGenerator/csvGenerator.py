@@ -8,7 +8,21 @@ def str_time_prop(start, end, time_format, prop):
 
     ptime = stime + prop * (etime - stime)
 
-    return time.strftime(time_format, time.localtime(ptime))
+    newTime = time.strftime(time_format, time.localtime(ptime))[11:16]
+    amOrPM = time.strftime(time_format, time.localtime(ptime))[-2:]
+
+    if amOrPM == 'PM' and newTime[:2] != '12' and newTime[:2] != '11' and newTime[:2] != '10':
+        newNum = int(newTime[1]) + 12
+        newTime = str(newNum) + newTime[-3:]
+    elif amOrPM == 'PM' and newTime[:2] != '12':
+        newNum = int(newTime[:2]) + 12
+        newTime = str(newNum) + newTime[-3:]
+    elif amOrPM == 'AM' and newTime[:2] == '12':
+        newTime = '00' + newTime[-3:]
+
+    datetime = time.strftime(time_format, time.localtime(ptime))[:11] + newTime
+
+    return datetime
 
 
 def random_date(start, end, prop):
