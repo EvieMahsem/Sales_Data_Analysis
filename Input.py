@@ -1,7 +1,11 @@
 from pyspark.sql import SparkSession
 import pandas as pd
+<<<<<<< Updated upstream
 from spark_functions import SparkQuerrying
 import graphGUI
+=======
+from spark_functions import *
+>>>>>>> Stashed changes
 
 spark = SparkSession.builder.getOrCreate()
 data = pd.read_csv("csvGenerator/data.csv")
@@ -9,7 +13,10 @@ spark_df = spark.createDataFrame(data)
 
 
 def insert_query():
+    colInput = columnGen(spark_df)
+    obj = SparkQuerrying(spark_df,colInput)
     while True:
+        print("What would you like to do?")
         print("\t1. To do a Where statment AND a Group By")
         print("\t2. To do a Where statment AND NO group By")
         print("\t3. To do a select statement with just a Group By") 
@@ -18,13 +25,9 @@ def insert_query():
         lel = int(input("Please make a selection: "))
         if lel == 5:
             break
-        print("How many columns do you want to select?")
-        print(f"The columns you can select are: {spark_df.columns}")
-        colInput = input("Please list the columns you would like: ").split(',')
-        obj = SparkQuerrying(spark_df,colInput) 
-        aggreagteFunctions = ['count','max','min','first','last', 'mean','sum']
-    
+
         if lel == 1:
+            aggreagteFunctions = ['count','max','min','first','last', 'mean','sum']
             print(colInput)
             print("What is the conditional you would like to use? For example: orderID > 10 ")
             whereCon = input("Please input: ")
@@ -40,6 +43,7 @@ def insert_query():
             whereCon = input("Please input: ")
             obj.SelectWhere(whereCon)                    
         elif lel == 3:
+            aggreagteFunctions = ['count','max','min','first','last', 'mean','sum']
             print(colInput)
             print("What column do you want to group by?", colInput)
             groupByVar = input("Please input: ")
@@ -49,7 +53,7 @@ def insert_query():
             obj.SelectGBy(groupByVar,keys,values)
         elif lel == 4:
             print(colInput)
-            obj.Select(colInput)
+            obj.Select()
         else:
             print("Please make a valid input.")
 
