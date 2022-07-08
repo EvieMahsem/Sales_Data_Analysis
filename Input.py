@@ -1,11 +1,7 @@
 from pyspark.sql import SparkSession
 import pandas as pd
-<<<<<<< Updated upstream
-from spark_functions import SparkQuerrying
-import graphGUI
-=======
 from spark_functions import *
->>>>>>> Stashed changes
+import graphGUI
 
 spark = SparkSession.builder.getOrCreate()
 data = pd.read_csv("csvGenerator/data.csv")
