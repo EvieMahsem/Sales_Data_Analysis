@@ -77,4 +77,11 @@ def productPopYearCity(prodName, cityName):
 
     return idList, dataList
 
+def totalSalesTime():
+    data = spark_df.select(['orderID', 'datetime']).groupBy(spark_df.datetime.substr(12,2)).agg({'orderID': 'count'}).sort('substring(datetime, 12, 2)').collect()
+    idList = [i[0] for i in data]
+    dataList = [i[1] for i in data]
+
+    return idList, dataList
+
 
