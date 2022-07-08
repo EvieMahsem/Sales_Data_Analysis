@@ -2,16 +2,22 @@ from pyspark.sql import SparkSession
 import pandas as pd
 from spark_functions import SparkQuerrying
 
+spark = SparkSession.builder.getOrCreate()
+data = pd.read_csv("csvGenerator/data.csv")
+spark_df = spark.createDataFrame(data)
+
+
 def insert_query():
     while True:
         print("This is the querying portion of the program.")
-        print("\t1. To do a Where statment AND a Group By")
-        print("\t2. To do a Where statment AND NO group By")
-        print("\t3. To do a select statement with just a Group By") 
-        print("\t4. A select statement without a where or group by")
-        print("\t5. To return to the main menu")
-        lel = int(input("Please make a selection: "))
+        lel = 0
         while lel != 5:
+            print("\t1. To do a Where statment AND a Group By")
+            print("\t2. To do a Where statment AND NO group By")
+            print("\t3. To do a select statement with just a Group By") 
+            print("\t4. A select statement without a where or group by")
+            print("\t5. To return to the main menu")
+            lel = int(input("Please make a selection: "))
             print("How many columns do you want to select?")
             print(f"The columns you can select are: {spark_df.columns}")
             colInput = input("Please list the columns you would like: ").split(',')
@@ -24,7 +30,7 @@ def insert_query():
                 whereCon = input("Please input: ")
                 print("What column do you want to group by?", colInput)
                 groupByVar = input("Please input: ")
-                keys = input("Please input the column names you want to aggreagte: ").split(',')
+                keys = input("Please input the column names you want to aggregate: ").split(',')
                 print(aggreagteFunctions)
                 values = input("Please input the functions you would like to use: ").split(',')
                 obj.SelectWhereGBy(whereCon,groupByVar,keys,values)

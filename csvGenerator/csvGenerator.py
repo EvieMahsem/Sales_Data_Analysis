@@ -27,15 +27,15 @@ def createFullNames(num):
     with open('lastNames.txt', 'r') as f:
         lastNames = [line.rstrip('\n') for line in f]
 
-    with open('fullNames.txt', 'a') as f:
+    with open('csvGenerator/fullNames.txt', 'a') as f:
         for i in range(num):
             f.write(f"{firstNames[random.randint(0, len(firstNames) - 1)]} {lastNames[random.randint(0, len(lastNames) - 1)]}\n")
 
 def getinputs(num):
-    with open('fullNames.txt', 'r') as f:
+    with open('csvGenerator/fullNames.txt', 'r') as f:
         fullNames = [line.rstrip('\n') for line in f]
 
-    with open('ecommerce.txt', 'r') as f:
+    with open('csvGenerator/ecommerce.txt', 'r') as f:
         websites = [line.rstrip('\n') for line in f]
     
     for i in range(1, num + 1):
@@ -73,7 +73,7 @@ def getinputs(num):
         inputList.append(paymentType)
         inputList.append(quantity)
         inputList.append("{:0.2f}".format(price))
-        inputList.append(random_date("1/1/2017 12:00 AM", "1/1/2022 11:59 PM", random.random()))
+        inputList.append(random_date("1/1/2021 12:00 AM", "12/31/2021 11:59 PM", random.random()))
         inputList.append(country)
         inputList.append(city)
         inputList.append(websiteName)
@@ -92,7 +92,7 @@ def getinputs(num):
         else:
             inputList.append(" ")
              
-        appendRow('data.csv', inputList)
+        appendRow('csvGenerator/data.csv', inputList)
 
 paymentTypes = ["Card", "Internet Banking", "UPI", "Wallet"]
 
