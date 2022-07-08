@@ -465,5 +465,3 @@ def startWindow():
     plotButton11.pack()
 
     win.mainloop()
-
-startWindow()

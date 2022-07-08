@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession
 import pandas as pd
 from spark_functions import SparkQuerrying
+import graphGUI
 
 spark = SparkSession.builder.getOrCreate()
 data = pd.read_csv("csvGenerator/data.csv")
@@ -55,7 +56,7 @@ def insert_query():
 def Startup ():
     while True:
         print("Hello, and welcome to the simulation.")
-        print("\t1. ")
+        print("\t1. To open visualization menu.")
         print("\t2. To make a query.")
         print("\t3. To close out the program.")
         while True:
@@ -67,7 +68,7 @@ def Startup ():
             else:
                 break
         if sel == 1:
-            pass
+            graphGUI.startWindow()
         elif sel == 2:
             insert_query()
         elif sel == 3:
