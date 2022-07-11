@@ -110,8 +110,8 @@ def getinputs(num):
 
 paymentTypes = ["Card", "Internet Banking", "UPI", "Wallet"]
 
-products = {"Bodywash": ["Axe", "Old Spice", "Dove", "CeraVe", "Nivea", "Olay", 4.97, 8.29, 6.99, 11.99, 8.79, 8.99, [4, 12], [4, 12], [4, 12], [4, 12], [4, 12], [4, 12]],
-            "Shampoos/Conditioners": ["Garnier", "Suave", "Herbal Essences", "Dove", "TRESemme", "Head & Shoulders", 4.99, 4.99, 6.79, 7.99, 6.29, 5.99, [4, 12], [4, 12], [4, 12], [4, 12], [4, 12], [4, 12]],
+products = {"Bodywash": ["Axe", "Old Spice", "Dove Bodywash", "CeraVe", "Nivea", "Olay", 4.97, 8.29, 6.99, 11.99, 8.79, 8.99, [4, 12], [4, 12], [4, 12], [4, 12], [4, 12], [4, 12]],
+            "Shampoos/Conditioners": ["Garnier", "Suave", "Herbal Essences", "Dove Shampoo", "TRESemme", "Head & Shoulders", 4.99, 4.99, 6.79, 7.99, 6.29, 5.99, [4, 12], [4, 12], [4, 12], [4, 12], [4, 12], [4, 12]],
             "Toothpaste": ["Colgate", "Crest", "Advance White", "Sensodyne", "Biotene", "Parodontax", 1.97, 2.33, 2.67, 5.99, 6.59, 8.69, [6, 20], [6, 25], [4, 15], [4, 30], [4, 12], [2, 15]],
             "Mouthwash": ["Listerine", "Act", "Peridex", "TheraBreath", 3.89, 4.79, 5.45, 6.67, [4, 15], [4, 30], [4, 12], [2, 15]],
             "Cars/Trucks": ["Ford", "Dodge", "Kia", "Hundai", "Volkswagen", "Nissan", 40000.00, 37564.99, 22590.00, 28150.00, 23128.00, 45030.00, [1, 7], [1, 9], [1, 8], [1, 12], [1, 12], [1, 6]],
