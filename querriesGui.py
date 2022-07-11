@@ -8,49 +8,49 @@ data = pd.read_csv("csvGenerator/data.csv")
 spark_df = spark.createDataFrame(data)
 
 def topSellingProductCountry(countryName):
-    data = spark_df.select(['productName']).where(spark_df.country == countryName).groupBy('productName').agg({'productName': 'count'}).sort('count(productName)').collect()
+    data = spark_df.select(['productName', 'orderID']).where(spark_df.country == countryName).groupBy('productName').agg({'orderID': 'count'}).sort('count(orderID)').collect()
     idList = [i[0] for i in data]
     dataList = [i[1] for i in data]
 
     return idList, dataList
 
 def topSellingProductCity(cityName):
-    data = spark_df.select(['productName']).where(spark_df.city == cityName).groupBy('productName').agg({'productName': 'count'}).sort('count(productName)').collect()
+    data = spark_df.select(['productName', 'orderID']).where(spark_df.city == cityName).groupBy('productName').agg({'orderID': 'count'}).sort('count(orderID)').collect()
     idList = [i[0] for i in data]
     dataList = [i[1] for i in data]
 
     return idList, dataList
 
 def totalSalesPerCity():
-    data = spark_df.select(['city']).groupBy('city').agg({'city': 'count'}).sort('count(city)').collect()
+    data = spark_df.select(['city', 'orderID']).groupBy('city').agg({'orderID': 'count'}).sort('count(orderID)').collect()
     idList = [i[0] for i in data]
     dataList = [i[1] for i in data]
 
     return idList, dataList
 
 def totalSalesPerCountry():
-    data = spark_df.select(['country']).groupBy('country').agg({'country': 'count'}).sort('count(country)').collect()
+    data = spark_df.select(['country', 'orderID']).groupBy('country').agg({'orderID': 'count'}).sort('count(orderID)').collect()
     idList = [i[0] for i in data]
     dataList = [i[1] for i in data]
 
     return idList, dataList
 
 def totalTopSelling():
-    data = spark_df.select(['productCategory', 'quantity']).groupBy('productCategory').agg({'quantity': 'sum'}).sort('sum(quantity)').collect()
+    data = spark_df.select(['productCategory', 'orderID']).groupBy('productCategory').agg({'orderID': 'count'}).sort('count(orderID)').collect()
     idList = [i[0] for i in data]
     dataList = [i[1] for i in data]
 
     return idList, dataList
 
 def topSellingCategoryCountry(countryName):
-    data = spark_df.select(['productCategory', 'quantity']).where(spark_df.country == countryName).groupBy('productCategory').agg({'quantity': 'sum'}).sort('sum(quantity)').collect()
+    data = spark_df.select(['productCategory', 'orderID']).where(spark_df.country == countryName).groupBy('productCategory').agg({'orderID': 'count'}).sort('count(orderID)').collect()
     idList = [i[0] for i in data]
     dataList = [i[1] for i in data]
 
     return idList, dataList
 
 def topSellingCategoryCity(cityName):
-    data = spark_df.select(['productCategory', 'quantity']).where(spark_df.city == cityName).groupBy('productCategory').agg({'quantity': 'sum'}).sort('sum(quantity)').collect()
+    data = spark_df.select(['productCategory', 'orderID']).where(spark_df.city == cityName).groupBy('productCategory').agg({'orderID': 'count'}).sort('count(orderID)').collect()
     idList = [i[0] for i in data]
     dataList = [i[1] for i in data]
 
@@ -79,6 +79,30 @@ def productPopYearCity(prodName, cityName):
 
 def totalSalesTime():
     data = spark_df.select(['orderID', 'datetime']).groupBy(spark_df.datetime.substr(12,2)).agg({'orderID': 'count'}).sort('substring(datetime, 12, 2)').collect()
+    idList = [i[0] for i in data]
+    dataList = [i[1] for i in data]
+
+    return idList, dataList
+
+def productSalesTime(product):
+    data = spark_df.select(['productName', 'orderID', 'datetime']).where(spark_df.productName == product).groupBy(spark_df.datetime.substr(12,2)).agg({'orderID': 'count'}).sort('substring(datetime, 12, 2)').collect()
+    spark_df.select(['productName', 'datetime']).where(spark_df.productName == product).groupBy(spark_df.datetime.substr(12,2)).agg({'productName': 'count'}).sort('substring(datetime, 12, 2)').show()
+    idList = [i[0] for i in data]
+    dataList = [i[1] for i in data]
+
+    return idList, dataList
+
+def productSalesTimeCountry(product, country):
+    data = spark_df.select(['productName', 'datetime']).where((spark_df.productName == product) & (spark_df.country == country)).groupBy(spark_df.datetime.substr(12,2)).agg({'productName': 'count'}).sort('substring(datetime, 12, 2)').collect()
+    spark_df.select(['productName', 'datetime']).where((spark_df.productName == product) & (spark_df.country == country)).groupBy(spark_df.datetime.substr(12,2)).agg({'productName': 'count'}).sort('substring(datetime, 12, 2)').show()
+    idList = [i[0] for i in data]
+    dataList = [i[1] for i in data]
+
+    return idList, dataList
+
+def productSalesTimeCity(product, city):
+    data = spark_df.select(['productName', 'orderID', 'datetime']).where((spark_df.productName == product) & (spark_df.city == city)).groupBy(spark_df.datetime.substr(12,2)).agg({'orderID': 'count'}).sort('substring(datetime, 12, 2)').collect()
+    spark_df.select(['productName', 'datetime']).where((spark_df.productName == product) & (spark_df.city == city)).groupBy(spark_df.datetime.substr(12,2)).agg({'productName': 'count'}).sort('substring(datetime, 12, 2)').show()
     idList = [i[0] for i in data]
     dataList = [i[1] for i in data]
 
