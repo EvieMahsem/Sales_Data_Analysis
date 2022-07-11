@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession
 import pandas as pd
 from spark_functions import SparkQuerrying
+import numpy as np
 
 
 spark = SparkSession.builder.getOrCreate()
@@ -57,21 +58,34 @@ def topSellingCategoryCity(cityName):
     return idList, dataList
     
 def productPopYear(prodName):
-    data = spark_df.select(['productName', 'datetime', 'quantity']).where(spark_df.productName == prodName).groupBy(spark_df.datetime.substr(1,2)).agg({'quantity': 'sum'}).sort('substring(datetime, 1, 2)').collect()
+    outlierTest = spark_df.select(['productName', 'quantity']).where(spark_df.productName == prodName).sort('quantity').collect()
+    outlierData = [i[1] for i in outlierTest]
+    quart1, quart3 = np.quantile(outlierData, [0.25, 0.5, 0.75])[0], np.quantile(outlierData, [0.25, 0.5, 0.75])[2]
+
+    data = spark_df.select(['productName', 'datetime', 'quantity']).where((spark_df.productName == prodName) & (spark_df.quantity >= quart1) & (spark_df.quantity <= quart3)).groupBy(spark_df.datetime.substr(1,2)).agg({'quantity': 'sum'}).sort('substring(datetime, 1, 2)').collect()
     idList = [i[0] for i in data]
     dataList = [i[1] for i in data]
 
     return idList, dataList
 
 def productPopYearCountry(prodName, countryName):
-    data = spark_df.select(['productName', 'datetime', 'country', 'quantity']).where((spark_df.productName == prodName) & (spark_df.country == countryName)).groupBy(spark_df.datetime.substr(1,2)).agg({'quantity': 'sum'}).sort('substring(datetime, 1, 2)').collect()
+    outlierTest = spark_df.select(['productName', 'quantity']).where((spark_df.productName == prodName) & (spark_df.country == countryName)).sort('quantity').collect()
+    outlierData = [i[1] for i in outlierTest]
+    quart1, quart3 = np.quantile(outlierData, [0.25, 0.5, 0.75])[0], np.quantile(outlierData, [0.25, 0.5, 0.75])[2]
+
+    data = spark_df.select(['productName', 'datetime', 'country', 'quantity']).where((spark_df.productName == prodName) & (spark_df.country == countryName) & (spark_df.quantity >= quart1) & (spark_df.quantity <= quart3)).groupBy(spark_df.datetime.substr(1,2)).agg({'quantity': 'sum'}).sort('substring(datetime, 1, 2)').collect()
     idList = [i[0] for i in data]
     dataList = [i[1] for i in data]
 
     return idList, dataList
 
 def productPopYearCity(prodName, cityName):
-    data = spark_df.select(['productName', 'datetime', 'city', 'quantity']).where((spark_df.productName == prodName) & (spark_df.city == cityName) & (spark_df.quantity < 20000)).groupBy(spark_df.datetime.substr(1,2)).agg({'quantity': 'sum'}).sort('substring(datetime, 1, 2)').collect()
+    outlierTest = spark_df.select(['productName', 'quantity']).where((spark_df.productName == prodName) & (spark_df.city == cityName)).sort('quantity').collect()
+    outlierData = [i[1] for i in outlierTest]
+    quart1, quart3 = np.quantile(outlierData, [0.25, 0.5, 0.75])[0], np.quantile(outlierData, [0.25, 0.5, 0.75])[2]
+
+
+    data = spark_df.select(['productName', 'datetime', 'city', 'quantity']).where((spark_df.productName == prodName) & (spark_df.city == cityName) & (spark_df.quantity >= quart1) & (spark_df.quantity <= quart3)).groupBy(spark_df.datetime.substr(1,2)).agg({'quantity': 'sum'}).sort('substring(datetime, 1, 2)').collect()
     idList = [i[0] for i in data]
     dataList = [i[1] for i in data]
 
