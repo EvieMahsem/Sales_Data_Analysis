@@ -754,5 +754,3 @@ for i in countries.values():
 citiesList.sort()
 productsList.sort()
 countriesList.sort()
-print(productsList)
-startWindow()
