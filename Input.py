@@ -18,37 +18,76 @@ def insert_query():
 \t2. To do a Where statment AND NO group By
 \t3. To do a select statement with just a Group By        
 \t4. A select statement without a where or group by        
-\t5. To return to the main menu        
-        """,'cyan'))
+\t5. To return to the main menu""",'cyan'))
         lel = int(input(colored("Please make a selection: ",'magenta')))
         if lel == 5:
             break
 
         if lel == 1:
-            aggreagteFunctions = ['count','max','min','first','last', 'mean','sum']
+
+            #Start of Where code
             print(colored(colInput,'yellow'))
-            print(colored("What is the conditional you would like to use? For example: orderID > 10 ",'cyan'))
-            whereCon = input(colored("Please input: ",'magenta'))
+            print(colored("What column do you want to do a condition on? ",'cyan'))
+            whereCol = input(colored("Please input: ",'magenta'))
+
+            op = [">", "<", "="]
+            print(colored(f"What type of opertator do you want to use: {colored(op,'yellow')}",'cyan'))
+            whereOp = input(colored("Please input: ",'magenta'))
+
+            print(colored("Please input the number or string of conditional:",'cyan'))
+            whereValue = input(colored("Please input: ",'magenta'))
+            #End of Where code
+
+            #Start of GroupBy
             print(colored("What column do you want to group by?", "magenta"), colored(colInput,'yellow'))
             groupByVar = input(colored("Please input: ",'magenta'))
-            keys = input(colored("Please input the column names you want to aggregate: ",'magenta')).split(',')
-            print(colored(aggreagteFunctions,'yellow'))
-            values = input(colored("Please input the functions you would like to use: ",'magenta')).split(',')
-            obj.SelectWhereGBy(whereCon,groupByVar,keys,values)
+            #End of GroupBy
+        
+            #Start of agg (See Input.py for the function)
+            aggCol, aggType = aggGen()
+            #End of agg
+
+            if whereOp == "<" or whereOp == ">":
+                whereStatement = whereCol + " " + whereOp + " " + whereValue
+                obj.SelectWhereGBy(whereStatement,groupByVar,aggCol,aggType)
+            elif whereOp == "=":
+                obj.SelectWhereGByEqual(whereCol,whereValue,groupByVar, aggCol, aggType)
+            else:
+                print(colored("Please enter a vaild opertator!",'red'))
+            
         elif lel == 2:
+            #Start of Where code
             print(colored(colInput,'yellow'))
-            print(colored("What is the conditional you would like to use? For example: orderID > 10 ",'cyan'))
-            whereCon = input(colored("Please input: ",'magenta'))
-            obj.SelectWhere(whereCon)                    
+            print(colored("What column do you want to do a condition on? ",'cyan'))
+            whereCol = input(colored("Please input: ",'magenta'))
+
+            op = [">", "<", "="]
+            print(colored(f"What type of opertator do you want to use: {colored(op,'yellow')}",'cyan'))
+            whereOp = input(colored("Please input: ",'magenta'))
+
+            print(colored("Please input the number or string of conditional:",'cyan'))
+            whereValue = input(colored("Please input: ",'magenta'))
+            #End of Where code
+
+            if whereOp == "<" or whereOp == ">":
+                whereStatement = whereCol + " " + whereOp + " " + whereValue
+                obj.SelectWhere(whereStatement)
+            elif whereOp == "=":
+                obj.SelectWhereEqual(whereCol, whereValue)
+            else:
+                print(colored("Please enter a vaild answer!",'red'))                  
         elif lel == 3:
-            aggreagteFunctions = ['count','max','min','first','last', 'mean','sum']
+            #Start of group by
             print(colored(colInput,'yellow'))
             print(colored("What column do you want to group by?", "magenta"), colored(colInput,'yellow'))
             groupByVar = input(colored("Please input: ",'magenta'))
-            keys = input(colored("Please input the column names you want to aggregate: ",'magenta')).split(',')
-            print(colored(aggreagteFunctions,'yellow'))
-            values = input(colored("Please input the functions you would like to use: ",'magenta')).split(',')
-            obj.SelectGBy(groupByVar,keys,values)
+            #End of group by
+
+            #Start of agg (See Input.py for the function)
+            aggCol, aggType = aggGen()
+            #End of agg
+
+            obj.SelectGB(groupByVar,aggCol,aggType)
         elif lel == 4:
             print(colored(colInput,'yellow'))
             obj.Select()
@@ -60,8 +99,7 @@ def Startup ():
         print(colored("Hello, and welcome to the simulation.", 'magenta'))
         print(colored("""\t1. To open visualization menu.
 \t2. To make a query.
-\t3. To close out the program.       
-        """,'cyan'))
+\t3. To close out the program.""",'cyan'))
         while True:
             try:
                 sel = int(input(colored("Selection: ",'magenta')))
