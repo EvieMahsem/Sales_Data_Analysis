@@ -6,7 +6,8 @@ import numpy as np
 
 spark = SparkSession.builder.getOrCreate()
 data = pd.read_csv("csvGenerator/data.csv")
-spark_df = spark.createDataFrame(data)
+# spark_df = spark.createDataFrame(data)
+spark_df = spark.read.option('header', 'true').csv("csvGenerator/data.csv")
 
 def topSellingProductCountry(countryName):
     data = spark_df.select(['productName', 'orderID']).where(spark_df.country == countryName).groupBy('productName').agg({'orderID': 'count'}).sort('count(orderID)').collect()
@@ -59,8 +60,9 @@ def topSellingCategoryCity(cityName):
     
 def productPopYear(prodName):
     outlierTest = spark_df.select(['productName', 'quantity']).where(spark_df.productName == prodName).sort('quantity').collect()
-    outlierData = [i[1] for i in outlierTest]
+    outlierData = [int(i[1]) for i in outlierTest]
     quart1, quart3 = np.quantile(outlierData, [0.25, 0.5, 0.75])[0], np.quantile(outlierData, [0.25, 0.5, 0.75])[2]
+    # quart1, quart3 = 0, 10000
 
     data = spark_df.select(['productName', 'datetime', 'quantity']).where((spark_df.productName == prodName) & (spark_df.quantity >= quart1) & (spark_df.quantity <= quart3)).groupBy(spark_df.datetime.substr(1,2)).agg({'quantity': 'sum'}).sort('substring(datetime, 1, 2)').collect()
     idList = [i[0] for i in data]
@@ -70,7 +72,7 @@ def productPopYear(prodName):
 
 def productPopYearCountry(prodName, countryName):
     outlierTest = spark_df.select(['productName', 'quantity']).where((spark_df.productName == prodName) & (spark_df.country == countryName)).sort('quantity').collect()
-    outlierData = [i[1] for i in outlierTest]
+    outlierData = [int(i[1]) for i in outlierTest]
     quart1, quart3 = np.quantile(outlierData, [0.25, 0.5, 0.75])[0], np.quantile(outlierData, [0.25, 0.5, 0.75])[2]
 
     data = spark_df.select(['productName', 'datetime', 'country', 'quantity']).where((spark_df.productName == prodName) & (spark_df.country == countryName) & (spark_df.quantity >= quart1) & (spark_df.quantity <= quart3)).groupBy(spark_df.datetime.substr(1,2)).agg({'quantity': 'sum'}).sort('substring(datetime, 1, 2)').collect()
@@ -81,7 +83,7 @@ def productPopYearCountry(prodName, countryName):
 
 def productPopYearCity(prodName, cityName):
     outlierTest = spark_df.select(['productName', 'quantity']).where((spark_df.productName == prodName) & (spark_df.city == cityName)).sort('quantity').collect()
-    outlierData = [i[1] for i in outlierTest]
+    outlierData = [int(i[1]) for i in outlierTest]
     quart1, quart3 = np.quantile(outlierData, [0.25, 0.5, 0.75])[0], np.quantile(outlierData, [0.25, 0.5, 0.75])[2]
 
 

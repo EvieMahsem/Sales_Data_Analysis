@@ -10,6 +10,7 @@ data = pd.read_csv("csvGenerator/data.csv")
 spark_df = spark.createDataFrame(data)
 
 
+
 def insert_query():
     colInput = columnGen(spark_df)
     obj = SparkQuerrying(spark_df,colInput)
