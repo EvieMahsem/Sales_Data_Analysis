@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import *
 import tkinter.ttk as ttk
-# from tkinter.ttk import *
 import querriesGui
 from matplotlib import pyplot as plt
 import numpy as np
@@ -20,10 +19,10 @@ def popItemsCountry():
         widget.destroy()
 
     popLabel = tk.Label(master=displayFrame,
-                        text="Enter Country Here",
+                        text="Select Country",
                         foreground="white",
-                        background="blue")
-    # popEntry = tk.Entry(master=displayFrame)
+                        background="#2E5984"
+                        )
     countryOutput = StringVar(displayFrame)
     countryOutput.set(countriesList[0]) # default value
 
@@ -32,8 +31,8 @@ def popItemsCountry():
 
     popButton = tk.Button(
                     master=displayFrame,
-                    text="Done",
-                    width=25,
+                    text="Show Graph",
+                    width=19,
                     height=2,
                     pady=5,
                     bg="blue",
@@ -41,7 +40,6 @@ def popItemsCountry():
                     command= lambda: showBarGraph(querriesGui.topSellingProductCountry(countryOutput.get()), f"{countryOutput.get()}'s Top Selling Products")
                     )
     popLabel.pack()
-    # popEntry.pack()
     countryEntry.pack()
     popButton.pack()
 
@@ -53,7 +51,6 @@ def popItemsCity():
                         text="Select City",
                         foreground="white",
                         background="blue")
-    # popEntry = tk.Entry(master=displayFrame)
 
     cityOutput = StringVar(displayFrame)
     cityOutput.set(citiesList[0]) # default value
@@ -63,8 +60,8 @@ def popItemsCity():
     
     popButton = tk.Button(
                     master=displayFrame,
-                    text="Done",
-                    width=25,
+                    text="Show Graph",
+                    width=19,
                     height=2,
                     pady=5,
                     bg="blue",
@@ -80,10 +77,9 @@ def totalSalesCity():
         widget.destroy()
 
     popLabel = tk.Label(master=displayFrame,
-                        text="Enter Specific City",
+                        text="Select City",
                         foreground="white",
                         background="blue")
-    # popEntry = tk.Entry(master=displayFrame)
 
     cityOutput = StringVar(displayFrame)
     cityOutput.set("") # default value
@@ -94,8 +90,8 @@ def totalSalesCity():
 
     popButton = tk.Button(
                     master=displayFrame,
-                    text="Done",
-                    width=25,
+                    text="Show Graph",
+                    width=19,
                     height=2,
                     pady=5,
                     bg="blue",
@@ -104,7 +100,6 @@ def totalSalesCity():
                     )
     popLabel.pack()
     cityEntry.pack()
-    # popEntry.pack()
     popButton.pack()
 
 def totalSalesCountry():
@@ -124,10 +119,9 @@ def topSellingCountry():
         widget.destroy()
 
     popLabel = tk.Label(master=displayFrame,
-                        text="Enter Specific Country",
+                        text="Select Country",
                         foreground="white",
                         background="blue")
-    # popEntry = tk.Entry(master=displayFrame)
 
     countryOutput = StringVar(displayFrame)
     countryOutput.set(countriesList[0]) # default value
@@ -138,8 +132,8 @@ def topSellingCountry():
 
     popButton = tk.Button(
                     master=displayFrame,
-                    text="Done",
-                    width=25,
+                    text="Show Graph",
+                    width=19,
                     height=2,
                     pady=5,
                     bg="blue",
@@ -148,7 +142,6 @@ def topSellingCountry():
                     )
     popLabel.pack()
     countryEntry.pack()
-    # popEntry.pack()
     popButton.pack()
 
 def topSellingCity():
@@ -156,10 +149,9 @@ def topSellingCity():
         widget.destroy()
 
     popLabel = tk.Label(master=displayFrame,
-                        text="Enter Specific City",
+                        text="Select City",
                         foreground="white",
                         background="blue")
-    # popEntry = tk.Entry(master=displayFrame)
     cityOutput = StringVar(displayFrame)
     cityOutput.set(citiesList[0]) # default value
 
@@ -168,8 +160,8 @@ def topSellingCity():
     
     popButton = tk.Button(
                     master=displayFrame,
-                    text="Done",
-                    width=25,
+                    text="Show Graph",
+                    width=19,
                     height=2,
                     pady=5,
                     bg="blue",
@@ -177,7 +169,6 @@ def topSellingCity():
                     command= lambda: showBarGraph(querriesGui.topSellingCategoryCity(cityOutput.get()), f"{cityOutput.get()}'s Total Category Sales")
                     )
     popLabel.pack()
-    # popEntry.pack()
     cityEntry.pack()
     popButton.pack()
 
@@ -186,10 +177,9 @@ def productPopYear():
         widget.destroy()
 
     popLabel = tk.Label(master=displayFrame,
-                        text="Enter Product Name",
+                        text="Select Product",
                         foreground="white",
                         background="blue")
-    # popEntry = tk.Entry(master=displayFrame)
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
 
@@ -198,8 +188,8 @@ def productPopYear():
 
     popButton = tk.Button(
                     master=displayFrame,
-                    text="Done",
-                    width=25,
+                    text="Show Graph",
+                    width=19,
                     height=2,
                     pady=5,
                     bg="blue",
@@ -207,7 +197,6 @@ def productPopYear():
                     command= lambda: showScatterGraph(querriesGui.productPopYear(productOutput.get()), f"{productOutput.get()}'s Popularity Over the Year", True)
                     )
     popLabel.pack()
-    # popEntry.pack()
     productEntry.pack()
     popButton.pack()
 
@@ -227,7 +216,7 @@ def productPopYearCountry():
     countryEntry['values'] = countriesList
 
     popLabel1 = tk.Label(master=displayFrame,
-                        text="Enter Product Name",
+                        text="Select Product",
                         foreground="white",
                         background="blue")
 
@@ -239,8 +228,8 @@ def productPopYearCountry():
     
     popButton = tk.Button(
                     master=displayFrame,
-                    text="Done",
-                    width=25,
+                    text="Show Graph",
+                    width=19,
                     height=2,
                     pady=5,
                     bg="blue",
@@ -259,7 +248,7 @@ def productPopYearCity():
         widget.destroy()
 
     popLabel = tk.Label(master=displayFrame,
-                        text="Enter City Name",
+                        text="Select City",
                         foreground="white",
                         background="blue")
     # popEntry = tk.Entry(master=displayFrame)
@@ -272,7 +261,7 @@ def productPopYearCity():
 
 
     popLabel1 = tk.Label(master=displayFrame,
-                        text="Enter Product Name",
+                        text="Select Product",
                         foreground="white",
                         background="blue")
 
@@ -284,8 +273,8 @@ def productPopYearCity():
 
     popButton = tk.Button(
                     master=displayFrame,
-                    text="Done",
-                    width=25,
+                    text="Show Graph",
+                    width=19,
                     height=2,
                     pady=5,
                     bg="blue",
@@ -310,10 +299,9 @@ def productSalesTime():
         widget.destroy()
 
     popLabel1 = tk.Label(master=displayFrame,
-                        text="Enter Product Name",
+                        text="Select Product",
                         foreground="white",
                         background="blue")
-    # popEntry1 = tk.Entry(master=displayFrame)
 
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
@@ -323,8 +311,8 @@ def productSalesTime():
 
     popButton = tk.Button(
                     master=displayFrame,
-                    text="Done",
-                    width=25,
+                    text="Show Graph",
+                    width=19,
                     height=2,
                     pady=5,
                     bg="blue",
@@ -333,7 +321,6 @@ def productSalesTime():
                     
                     )
     popLabel1.pack()
-    # popEntry1.pack()
     productEntry.pack()
     popButton.pack()
 
@@ -342,10 +329,9 @@ def countryProductSalesTime():
         widget.destroy()
 
     popLabel1 = tk.Label(master=displayFrame,
-                        text="Enter Product Name",
+                        text="Select Product",
                         foreground="white",
                         background="blue")
-    # popEntry1 = tk.Entry(master=displayFrame)
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
 
@@ -353,10 +339,9 @@ def countryProductSalesTime():
     productEntry['values'] = productsList
 
     popLabel2 = tk.Label(master=displayFrame,
-                        text="Enter Country Name",
+                        text="Select Country",
                         foreground="white",
                         background="blue")
-    # popEntry2 = tk.Entry(master=displayFrame)
 
     countryOutput = StringVar(displayFrame)
     countryOutput.set(countriesList[0]) # default value
@@ -366,8 +351,8 @@ def countryProductSalesTime():
 
     popButton = tk.Button(
                     master=displayFrame,
-                    text="Done",
-                    width=25,
+                    text="Show Graph",
+                    width=19,
                     height=2,
                     pady=5,
                     bg="blue",
@@ -376,10 +361,8 @@ def countryProductSalesTime():
                     
                     )
     popLabel1.pack()
-    # popEntry1.pack()
     productEntry.pack()
     popLabel2.pack()
-    # popEntry2.pack()
     countryEntry.pack()
     popButton.pack()
 
@@ -388,10 +371,10 @@ def cityProductSalesTime():
         widget.destroy()
 
     popLabel1 = tk.Label(master=displayFrame,
-                        text="Enter Product Name",
+                        text="Select Product",
                         foreground="white",
                         background="blue")
-    # popEntry1 = tk.Entry(master=displayFrame)
+
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
 
@@ -399,10 +382,9 @@ def cityProductSalesTime():
     productEntry['values'] = productsList
 
     popLabel2 = tk.Label(master=displayFrame,
-                        text="Enter Country Name",
+                        text="Select City",
                         foreground="white",
                         background="blue")
-    # popEntry2 = tk.Entry(master=displayFrame)
 
     cityOutput = StringVar(displayFrame)
     cityOutput.set(citiesList[0]) # default value
@@ -412,8 +394,8 @@ def cityProductSalesTime():
 
     popButton = tk.Button(
                     master=displayFrame,
-                    text="Done",
-                    width=25,
+                    text="Show Graph",
+                    width=19,
                     height=2,
                     pady=5,
                     bg="blue",
@@ -422,10 +404,8 @@ def cityProductSalesTime():
                     
                     )
     popLabel1.pack()
-    # popEntry1.pack()
     productEntry.pack()
     popLabel2.pack()
-    # popEntry2.pack()
     cityEntry.pack()
     popButton.pack()
 
@@ -468,7 +448,6 @@ def showScatterGraph(queryInput, title, addDate=False, addTime=False):
     plot1.plot(newx, newy)
   
     # creating the Tkinter canvas
-    # containing the Matplotlib figure
     fig.suptitle(title, fontsize=20)
     if addTime:
         plt.setp(plot1.get_xticklabels(), rotation=90, horizontalalignment='right')
@@ -547,13 +526,6 @@ def startWindow():
 
     buttonFrame.pack(side='left', fill='both', expand=False)
     displayFrame.pack(fill = 'both', expand=True)
-
-
-    # greeting = tk.Label(master=buttonFrame,
-    #                     text="Hello, Tkinter",
-    #                     foreground="white",
-    #                     background="blue")
-    # greeting.pack()
 
     plotButton1 = tk.Button(
                     master=buttonFrame,
@@ -754,3 +726,4 @@ for i in countries.values():
 citiesList.sort()
 productsList.sort()
 countriesList.sort()
+startWindow()

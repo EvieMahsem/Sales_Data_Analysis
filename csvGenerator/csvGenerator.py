@@ -1,4 +1,5 @@
 from csv import writer
+import names
 import random
 import time
 
@@ -33,25 +34,7 @@ def appendRow(file_name, list_of_elem):
         csv_writer = writer(write_obj)
         csv_writer.writerow(list_of_elem)
 
-def createFullNames(num):
-
-    with open('firstNames.txt', 'r') as f:
-        firstNames = [line.rstrip('\n') for line in f]
-
-    with open('lastNames.txt', 'r') as f:
-        lastNames = [line.rstrip('\n') for line in f]
-
-    with open('csvGenerator/fullNames.txt', 'a') as f:
-        for i in range(num):
-            f.write(f"{firstNames[random.randint(0, len(firstNames) - 1)]} {lastNames[random.randint(0, len(lastNames) - 1)]}\n")
-
 def getinputs(num):
-    with open('csvGenerator/fullNames.txt', 'r') as f:
-        fullNames = [line.rstrip('\n') for line in f]
-
-    with open('csvGenerator/ecommerce.txt', 'r') as f:
-        websites = [line.rstrip('\n') for line in f]
-    
     for i in range(1, num + 1):
         inputList = []
         productCategories = [i for i in products.keys()]
@@ -109,6 +92,8 @@ def getinputs(num):
         appendRow('csvGenerator/data.csv', inputList)
 
 paymentTypes = ["Card", "Internet Banking", "UPI", "Wallet"]
+fullNames = [names.get_full_name() for i in range(100)]
+websites = ["www.amazon.com", "www.ebay.com", "www.alibaba.com", "www.taobao.com", "www.walmart.com", "www.etsy.com", "www.craigslist.com", "www.target.com"]
 
 products = {"Bodywash": ["Axe", "Old Spice", "Dove Bodywash", "CeraVe", "Nivea", "Olay", 4.97, 8.29, 6.99, 11.99, 8.79, 8.99, [4, 12], [4, 12], [4, 12], [4, 12], [4, 12], [4, 12]],
             "Shampoos/Conditioners": ["Garnier", "Suave", "Herbal Essences", "Dove Shampoo", "TRESemme", "Head & Shoulders", 4.99, 4.99, 6.79, 7.99, 6.29, 5.99, [4, 12], [4, 12], [4, 12], [4, 12], [4, 12], [4, 12]],
