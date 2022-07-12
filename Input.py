@@ -1,4 +1,3 @@
-from pyparsing import col
 from pyspark.sql import SparkSession
 import pandas as pd
 from spark_functions import *
@@ -6,8 +5,7 @@ import graphGUI
 from termcolor import colored
 
 spark = SparkSession.builder.getOrCreate()
-data = pd.read_csv("csvGenerator/data.csv")
-spark_df = spark.createDataFrame(data)
+spark_df = spark.read.option('header', 'true').csv("csvGenerator/data.csv")
 
 
 
@@ -31,7 +29,7 @@ def insert_query():
             print(colored(colInput,'yellow'))
             print(colored("What is the conditional you would like to use? For example: orderID > 10 ",'cyan'))
             whereCon = input(colored("Please input: ",'magenta'))
-            print("What column do you want to group by?", colored(colInput,'yellow'))
+            print(colored("What column do you want to group by?", "magenta"), colored(colInput,'yellow'))
             groupByVar = input(colored("Please input: ",'magenta'))
             keys = input(colored("Please input the column names you want to aggregate: ",'magenta')).split(',')
             print(colored(aggreagteFunctions,'yellow'))
@@ -45,7 +43,7 @@ def insert_query():
         elif lel == 3:
             aggreagteFunctions = ['count','max','min','first','last', 'mean','sum']
             print(colored(colInput,'yellow'))
-            print("What column do you want to group by?", colored(colInput,'yellow'))
+            print(colored("What column do you want to group by?", "magenta"), colored(colInput,'yellow'))
             groupByVar = input(colored("Please input: ",'magenta'))
             keys = input(colored("Please input the column names you want to aggregate: ",'magenta')).split(',')
             print(colored(aggreagteFunctions,'yellow'))
