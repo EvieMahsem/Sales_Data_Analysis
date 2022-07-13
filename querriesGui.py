@@ -30,6 +30,13 @@ def totalSalesPerCity():
 
     return idList, dataList
 
+def compareTotalSalesPerCity(cityList):
+    data = spark_df.select(['city', 'orderID']).where(spark_df.city.isin(cityList)).groupBy('city').agg({'orderID': 'count'}).sort('count(orderID)').collect()
+    idList = [i[0] for i in data]
+    dataList = [i[1] for i in data]
+
+    return idList, dataList
+
 def totalSalesPerCountry():
     data = spark_df.select(['country', 'orderID']).groupBy('country').agg({'orderID': 'count'}).sort('count(orderID)').collect()
     idList = [i[0] for i in data]

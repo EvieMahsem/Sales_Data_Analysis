@@ -15,6 +15,7 @@ def getData(idList, dtList):
     startWindow()
 
 def popItemsCountry():
+    
     for widget in displayFrame.winfo_children():
         widget.destroy()
 
@@ -39,9 +40,9 @@ def popItemsCountry():
                     fg="yellow",
                     command= lambda: showBarGraph(querriesGui.topSellingProductCountry(countryOutput.get()), f"{countryOutput.get()}'s Top Selling Products")
                     )
-    popLabel.pack()
-    countryEntry.pack()
-    popButton.pack()
+    popLabel.place(relx=.5, rely=.33, anchor='center')
+    countryEntry.place(relx=.5, rely=.38, anchor='center')
+    popButton.place(relx=.84, rely=.95, anchor='center')
 
 def popItemsCity():
     for widget in displayFrame.winfo_children():
@@ -50,7 +51,7 @@ def popItemsCity():
     popLabel = tk.Label(master=displayFrame,
                         text="Select City",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
 
     cityOutput = StringVar(displayFrame)
     cityOutput.set(citiesList[0]) # default value
@@ -68,9 +69,9 @@ def popItemsCity():
                     fg="yellow",
                     command= lambda: showBarGraph(querriesGui.topSellingProductCity(cityOutput.get()), f"{cityOutput.get()}'s Top Selling Products")
                     )
-    popLabel.pack()
-    cityEntry.pack()
-    popButton.pack()
+    popLabel.place(relx=.5, rely=.33, anchor='center')
+    cityEntry.place(relx=.5, rely=.38, anchor='center')
+    popButton.place(relx=.84, rely=.95, anchor='center')
 
 def totalSalesCity():
     for widget in displayFrame.winfo_children():
@@ -79,13 +80,14 @@ def totalSalesCity():
     popLabel = tk.Label(master=displayFrame,
                         text="Select City",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
 
     cityOutput = StringVar(displayFrame)
     cityOutput.set("") # default value
 
     cityEntry = ttk.Combobox(displayFrame, textvariable=cityOutput)
     cityEntry['values'] = citiesList
+    comparing = []
 
 
     popButton = tk.Button(
@@ -96,11 +98,24 @@ def totalSalesCity():
                     pady=5,
                     bg="blue",
                     fg="yellow",
-                    command= lambda: showBarGraph(querriesGui.totalSalesPerCity(), "Total Sales Per City", cityOutput.get())
+                    command= lambda: [showBarGraph(querriesGui.totalSalesPerCity(), "Total Sales Per City", cityOutput.get()) if len(comparing) == 0 else compareBarGraphs(querriesGui.compareTotalSalesPerCity(comparing), "Total Sales Per City", cityOutput.get())]
                     )
-    popLabel.pack()
-    cityEntry.pack()
-    popButton.pack()
+    addButton = tk.Button(
+                    master=displayFrame,
+                    text="Add City",
+                    width=19,
+                    height=2,
+                    pady=5,
+                    bg="blue",
+                    fg="yellow",
+                    command= lambda: [comparing.append(cityOutput.get()), cityOutput.set("")]
+                    )
+    print(comparing)
+
+    popLabel.place(relx=.5, rely=.33, anchor='center')
+    cityEntry.place(relx=.5, rely=.38, anchor='center')
+    popButton.place(relx=.84, rely=.95, anchor='center')
+    addButton.place(relx=.5, rely=.43, anchor='center')
 
 def totalSalesCountry():
     for widget in displayFrame.winfo_children():
@@ -121,7 +136,7 @@ def topSellingCountry():
     popLabel = tk.Label(master=displayFrame,
                         text="Select Country",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
 
     countryOutput = StringVar(displayFrame)
     countryOutput.set(countriesList[0]) # default value
@@ -140,9 +155,9 @@ def topSellingCountry():
                     fg="yellow",
                     command= lambda: showBarGraph(querriesGui.topSellingCategoryCountry(countryOutput.get()), f"{countryOutput.get()}'s Total Category Sales")
                     )
-    popLabel.pack()
-    countryEntry.pack()
-    popButton.pack()
+    popLabel.place(relx=.5, rely=.33, anchor='center')
+    countryEntry.place(relx=.5, rely=.38, anchor='center')
+    popButton.place(relx=.84, rely=.95, anchor='center')
 
 def topSellingCity():
     for widget in displayFrame.winfo_children():
@@ -151,7 +166,7 @@ def topSellingCity():
     popLabel = tk.Label(master=displayFrame,
                         text="Select City",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
     cityOutput = StringVar(displayFrame)
     cityOutput.set(citiesList[0]) # default value
 
@@ -168,9 +183,9 @@ def topSellingCity():
                     fg="yellow",
                     command= lambda: showBarGraph(querriesGui.topSellingCategoryCity(cityOutput.get()), f"{cityOutput.get()}'s Total Category Sales")
                     )
-    popLabel.pack()
-    cityEntry.pack()
-    popButton.pack()
+    popLabel.place(relx=.5, rely=.33, anchor='center')
+    cityEntry.place(relx=.5, rely=.38, anchor='center')
+    popButton.place(relx=.84, rely=.95, anchor='center')
 
 def productPopYear():
     for widget in displayFrame.winfo_children():
@@ -179,7 +194,7 @@ def productPopYear():
     popLabel = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
 
@@ -196,9 +211,9 @@ def productPopYear():
                     fg="yellow",
                     command= lambda: showScatterGraph(querriesGui.productPopYear(productOutput.get()), f"{productOutput.get()}'s Popularity Over the Year", True)
                     )
-    popLabel.pack()
-    productEntry.pack()
-    popButton.pack()
+    popLabel.place(relx=.5, rely=.33, anchor='center')
+    productEntry.place(relx=.5, rely=.38, anchor='center')
+    popButton.place(relx=.84, rely=.95, anchor='center')
 
 def productPopYearCountry():
     for widget in displayFrame.winfo_children():
@@ -207,7 +222,7 @@ def productPopYearCountry():
     popLabel = tk.Label(master=displayFrame,
                         text="Select Country",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
 
     countryOutput = StringVar(displayFrame)
     countryOutput.set(countriesList[0]) # default value
@@ -218,7 +233,7 @@ def productPopYearCountry():
     popLabel1 = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
 
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
@@ -237,11 +252,11 @@ def productPopYearCountry():
                     command= lambda: showScatterGraph(querriesGui.productPopYearCountry(productOutput.get(), countryOutput.get()), f"{productOutput.get()}'s Popularity Over the Year in {countryOutput.get()}", True)
                     
                     )
-    popLabel.pack()
-    countryEntry.pack()
-    popLabel1.pack()
-    productEntry.pack()
-    popButton.pack()
+    popLabel.place(relx=.3, rely=.33, anchor='center')
+    countryEntry.place(relx=.3, rely=.38, anchor='center')
+    popLabel1.place(relx=.7, rely=.33, anchor='center')
+    productEntry.place(relx=.7, rely=.38, anchor='center')
+    popButton.place(relx=.84, rely=.95, anchor='center')
 
 def productPopYearCity():
     for widget in displayFrame.winfo_children():
@@ -250,7 +265,7 @@ def productPopYearCity():
     popLabel = tk.Label(master=displayFrame,
                         text="Select City",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
     # popEntry = tk.Entry(master=displayFrame)
 
     cityOutput = StringVar(displayFrame)
@@ -263,7 +278,7 @@ def productPopYearCity():
     popLabel1 = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
 
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
@@ -282,11 +297,11 @@ def productPopYearCity():
                     command= lambda: showScatterGraph(querriesGui.productPopYearCity(productEntry.get(), cityEntry.get()), f"{productEntry.get()}'s Popularity Over the Year in {cityEntry.get()}", True)
                     
                     )
-    popLabel.pack()
-    cityEntry.pack()
-    popLabel1.pack()
-    productEntry.pack()
-    popButton.pack()
+    popLabel.place(relx=.3, rely=.33, anchor='center')
+    cityEntry.place(relx=.3, rely=.38, anchor='center')
+    popLabel1.place(relx=.7, rely=.33, anchor='center')
+    productEntry.place(relx=.7, rely=.38, anchor='center')
+    popButton.place(relx=.84, rely=.95, anchor='center')
 
 def totalSalesTime():
     for widget in displayFrame.winfo_children():
@@ -301,7 +316,7 @@ def productSalesTime():
     popLabel1 = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
 
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
@@ -320,9 +335,9 @@ def productSalesTime():
                     command= lambda: showScatterGraph(querriesGui.productSalesTime(productEntry.get()), f"{productEntry.get()}'s Sales by Time", addTime=True)
                     
                     )
-    popLabel1.pack()
-    productEntry.pack()
-    popButton.pack()
+    popLabel1.place(relx=.5, rely=.33, anchor='center')
+    productEntry.place(relx=.5, rely=.38, anchor='center')
+    popButton.place(relx=.84, rely=.95, anchor='center')
 
 def countryProductSalesTime():
     for widget in displayFrame.winfo_children():
@@ -331,7 +346,7 @@ def countryProductSalesTime():
     popLabel1 = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
 
@@ -341,7 +356,7 @@ def countryProductSalesTime():
     popLabel2 = tk.Label(master=displayFrame,
                         text="Select Country",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
 
     countryOutput = StringVar(displayFrame)
     countryOutput.set(countriesList[0]) # default value
@@ -360,11 +375,11 @@ def countryProductSalesTime():
                     command= lambda: showScatterGraph(querriesGui.productSalesTimeCountry(productEntry.get(), countryEntry.get()), f"{productEntry.get()}'s Sales by Time in {countryEntry.get()}", addTime=True)
                     
                     )
-    popLabel1.pack()
-    productEntry.pack()
-    popLabel2.pack()
-    countryEntry.pack()
-    popButton.pack()
+    popLabel1.place(relx=.3, rely=.33, anchor='center')
+    productEntry.place(relx=.3, rely=.38, anchor='center')
+    popLabel2.place(relx=.7, rely=.33, anchor='center')
+    countryEntry.place(relx=.7, rely=.38, anchor='center')
+    popButton.place(relx=.84, rely=.95, anchor='center')
 
 def cityProductSalesTime():
     for widget in displayFrame.winfo_children():
@@ -373,7 +388,7 @@ def cityProductSalesTime():
     popLabel1 = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
 
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
@@ -384,7 +399,7 @@ def cityProductSalesTime():
     popLabel2 = tk.Label(master=displayFrame,
                         text="Select City",
                         foreground="white",
-                        background="blue")
+                        background="#2E5984")
 
     cityOutput = StringVar(displayFrame)
     cityOutput.set(citiesList[0]) # default value
@@ -403,11 +418,11 @@ def cityProductSalesTime():
                     command= lambda: showScatterGraph(querriesGui.productSalesTimeCity(productEntry.get(), cityEntry.get()), f"{productEntry.get()}'s Sales by Time in {cityEntry.get()}", addTime=True)
                     
                     )
-    popLabel1.pack()
-    productEntry.pack()
-    popLabel2.pack()
-    cityEntry.pack()
-    popButton.pack()
+    popLabel1.place(relx=.3, rely=.33, anchor='center')
+    productEntry.place(relx=.3, rely=.38, anchor='center')
+    popLabel2.place(relx=.7, rely=.33, anchor='center')
+    cityEntry.place(relx=.7, rely=.38, anchor='center')
+    popButton.place(relx=.84, rely=.95, anchor='center')
 
 
 
@@ -469,6 +484,25 @@ def showScatterGraph(queryInput, title, addDate=False, addTime=False):
     # placing the toolbar on the Tkinter window
     canvas.get_tk_widget().pack()
 
+def compareBarGraphs(queryInput, title, specific=""):
+    for widget in displayFrame.winfo_children():
+        widget.destroy()
+
+    f = Figure(figsize=(7, 7), dpi=100)
+    ax = f.add_subplot(111)
+
+    newx, newy = queryInput
+    width = .5
+
+    rects1 = ax.bar(newx, newy, width)
+    f.suptitle(title, fontsize=20)
+    plt.setp(ax.get_xticklabels(), rotation=30, horizontalalignment='right')
+
+    canvas = FigureCanvasTkAgg(f, master=displayFrame)
+    canvas.draw()
+
+    canvas.get_tk_widget().pack()
+
 def showBarGraph(queryInput, title, specific = ""):
     for widget in displayFrame.winfo_children():
         widget.destroy()
@@ -507,6 +541,7 @@ def showBarGraph(queryInput, title, specific = ""):
     canvas.get_tk_widget().pack()
 
 def startWindow():
+    global win
     win = tk.Tk()
     win.minsize(700, 700)
     global buttonFrame, displayFrame
@@ -726,4 +761,3 @@ for i in countries.values():
 citiesList.sort()
 productsList.sort()
 countriesList.sort()
-startWindow()
