@@ -1024,4 +1024,3 @@ for i in countries.values():
 citiesList.sort()
 productsList.sort()
 countriesList.sort()
-startWindow()
