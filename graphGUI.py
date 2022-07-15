@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import *
 import tkinter.ttk as ttk
+
+from matplotlib.ft2font import BOLD
 import querriesGui
 from matplotlib import pyplot as plt
 import numpy as np
@@ -22,14 +24,14 @@ def popItemsCountry():
     titleLabel = tk.Label(master=displayFrame,
                         text="Popular Items by Country",
                         foreground="white",
-                        background="#2E5984",
+                        background="#000026",
                         font=('TkDefaultFont', 20))
     titleLabel.place(relx=.5, rely=.05, anchor='center')
 
     popLabel = tk.Label(master=displayFrame,
                         text="Select Country",
                         foreground="white",
-                        background="#2E5984"
+                        background="#000026"
                         )
     countryOutput = StringVar(displayFrame)
     countryOutput.set(countriesList[0]) # default value
@@ -43,8 +45,8 @@ def popItemsCountry():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: showBarGraph(querriesGui.topSellingProductCountry(countryOutput.get()), f"{countryOutput.get()}'s Top Selling Products")
                     )
     popLabel.place(relx=.5, rely=.33, anchor='center')
@@ -58,14 +60,14 @@ def popItemsCity():
     titleLabel = tk.Label(master=displayFrame,
                         text="Popular Items by City",
                         foreground="white",
-                        background="#2E5984",
+                        background="#000026",
                         font=('TkDefaultFont', 20))
     titleLabel.place(relx=.5, rely=.05, anchor='center')
 
     popLabel = tk.Label(master=displayFrame,
                         text="Select City",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
 
     cityOutput = StringVar(displayFrame)
     cityOutput.set(citiesList[0]) # default value
@@ -79,8 +81,8 @@ def popItemsCity():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: showBarGraph(querriesGui.topSellingProductCity(cityOutput.get()), f"{cityOutput.get()}'s Top Selling Products")
                     )
     popLabel.place(relx=.5, rely=.33, anchor='center')
@@ -94,7 +96,7 @@ def totalSalesCity():
     titleLabel = tk.Label(master=displayFrame,
                         text="Total Sales by City",
                         foreground="white",
-                        background="#2E5984",
+                        background="#000026",
                         font=('TkDefaultFont', 20))
     titleLabel.place(relx=.5, rely=.05, anchor='center')
     
@@ -103,12 +105,12 @@ def totalSalesCity():
     popLabel = tk.Label(master=displayFrame,
                         text="Select City",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
     
     citiesLabel = tk.Label(master=displayFrame,
                             text="Cities to Show:",
                             foreground="white",
-                            background="#2E5984")
+                            background="#000026")
 
     cityOutput = StringVar(displayFrame)
     cityOutput.set("") # default value
@@ -124,8 +126,8 @@ def totalSalesCity():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: [showBarGraph(querriesGui.totalSalesPerCity(), "Total Sales Per City", cityOutput.get()) if len(comparing) == 0 else compareBarGraphs(querriesGui.compareTotalSalesPerCity(comparing), "Total Sales Per City", cityOutput.get())]
                     )
     addButton = tk.Button(
@@ -134,8 +136,8 @@ def totalSalesCity():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: [comparing.append(cityOutput.get()), tk.Label(master=displayFrame, text=cityOutput.get(), foreground="white", background="#2E5984").place(relx=extrax, rely=(extray + 0.05 * len(comparing)), anchor="center"), cityOutput.set("")]
                     )
                     
@@ -166,14 +168,14 @@ def topSellingCountry():
     titleLabel = tk.Label(master=displayFrame,
                         text="Top Selling Categories by Country",
                         foreground="white",
-                        background="#2E5984",
+                        background="#000026",
                         font=('TkDefaultFont', 20))
     titleLabel.place(relx=.5, rely=.05, anchor='center')
 
     popLabel = tk.Label(master=displayFrame,
                         text="Select Country",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
 
     countryOutput = StringVar(displayFrame)
     countryOutput.set(countriesList[0]) # default value
@@ -188,8 +190,8 @@ def topSellingCountry():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: showBarGraph(querriesGui.topSellingCategoryCountry(countryOutput.get()), f"{countryOutput.get()}'s Total Category Sales")
                     )
     popLabel.place(relx=.5, rely=.33, anchor='center')
@@ -203,14 +205,14 @@ def topSellingCity():
     titleLabel = tk.Label(master=displayFrame,
                         text="Top Selling Categories by City",
                         foreground="white",
-                        background="#2E5984",
+                        background="#000026",
                         font=('TkDefaultFont', 20))
     titleLabel.place(relx=.5, rely=.05, anchor='center')
 
     popLabel = tk.Label(master=displayFrame,
                         text="Select City",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
     cityOutput = StringVar(displayFrame)
     cityOutput.set(citiesList[0]) # default value
 
@@ -223,8 +225,8 @@ def topSellingCity():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: showBarGraph(querriesGui.topSellingCategoryCity(cityOutput.get()), f"{cityOutput.get()}'s Total Category Sales")
                     )
     popLabel.place(relx=.5, rely=.33, anchor='center')
@@ -241,19 +243,19 @@ def productPopYear():
     titleLabel = tk.Label(master=displayFrame,
                         text="Product Popularity Over the Year",
                         foreground="white",
-                        background="#2E5984",
+                        background="#000026",
                         font=('TkDefaultFont', 20))
     titleLabel.place(relx=.5, rely=.05, anchor='center')
 
     popLabel = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
 
     citiesLabel = tk.Label(master=displayFrame,
                             text="Products to Show:",
                             foreground="white",
-                            background="#2E5984")
+                            background="#000026")
 
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
@@ -267,8 +269,8 @@ def productPopYear():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: testshowScatterGraph(querriesGui.productPopYear(comparing), "Product Popularity Over the Year", True)
                     )
     addButton = tk.Button(
@@ -277,8 +279,8 @@ def productPopYear():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: [comparing.append(productOutput.get()), tk.Label(master=displayFrame, text=productOutput.get(), foreground="white", background="#2E5984").place(relx=extrax, rely=(extray + 0.05 * len(comparing)), anchor="center"), productOutput.set("")]
                     )
     citiesLabel.place(relx=.1, rely=.43, anchor='center')
@@ -294,7 +296,7 @@ def productPopYearCountry():
     titleLabel = tk.Label(master=displayFrame,
                         text="Product Popularity in Country",
                         foreground="white",
-                        background="#2E5984",
+                        background="#000026",
                         font=('TkDefaultFont', 20))
     titleLabel.place(relx=.5, rely=.05, anchor='center')
 
@@ -304,12 +306,12 @@ def productPopYearCountry():
     popLabel = tk.Label(master=displayFrame,
                         text="Select Country",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
 
     citiesLabel = tk.Label(master=displayFrame,
                             text="Products to Show:",
                             foreground="white",
-                            background="#2E5984")
+                            background="#000026")
 
     countryOutput = StringVar(displayFrame)
     countryOutput.set(countriesList[0]) # default value
@@ -320,7 +322,7 @@ def productPopYearCountry():
     popLabel1 = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
 
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
@@ -334,8 +336,8 @@ def productPopYearCountry():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: testshowScatterGraph(querriesGui.productPopYearCountry(comparing, countryOutput.get()), f"Product Popularity in {countryOutput.get()} Over 2021", True)
                     
                     )
@@ -345,8 +347,8 @@ def productPopYearCountry():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: [comparing.append(productOutput.get()), tk.Label(master=displayFrame, text=productOutput.get(), foreground="white", background="#2E5984").place(relx=extrax, rely=(extray + 0.05 * len(comparing)), anchor="center"), productOutput.set("")]
                     )
     citiesLabel.place(relx=.1, rely=.43, anchor='center')
@@ -364,7 +366,7 @@ def productPopYearCity():
     titleLabel = tk.Label(master=displayFrame,
                         text="Product Popularity in City",
                         foreground="white",
-                        background="#2E5984",
+                        background="#000026",
                         font=('TkDefaultFont', 20))
     titleLabel.place(relx=.5, rely=.05, anchor='center')
 
@@ -374,11 +376,11 @@ def productPopYearCity():
     popLabel = tk.Label(master=displayFrame,
                         text="Select City",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
     citiesLabel = tk.Label(master=displayFrame,
                             text="Products to Show:",
                             foreground="white",
-                            background="#2E5984")
+                            background="#000026")
     # popEntry = tk.Entry(master=displayFrame)
 
     cityOutput = StringVar(displayFrame)
@@ -391,7 +393,7 @@ def productPopYearCity():
     popLabel1 = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
 
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
@@ -405,8 +407,8 @@ def productPopYearCity():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: testshowScatterGraph(querriesGui.productPopYearCity(comparing, cityEntry.get()), f"Product Popularity in {cityEntry.get()} Over 2021", True)
                     
                     )
@@ -416,8 +418,8 @@ def productPopYearCity():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: [comparing.append(productOutput.get()), tk.Label(master=displayFrame, text=productOutput.get(), foreground="white", background="#2E5984").place(relx=extrax, rely=(extray + 0.05 * len(comparing)), anchor="center"), productOutput.set("")]
                     )
     citiesLabel.place(relx=.1, rely=.43, anchor='center')
@@ -441,7 +443,7 @@ def productSalesTime():
     titleLabel = tk.Label(master=displayFrame,
                         text="Product Sales by Time",
                         foreground="white",
-                        background="#2E5984",
+                        background="#000026",
                         font=('TkDefaultFont', 20))
     titleLabel.place(relx=.5, rely=.05, anchor='center')
 
@@ -451,11 +453,11 @@ def productSalesTime():
     popLabel1 = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
     citiesLabel = tk.Label(master=displayFrame,
                             text="Products to Show:",
                             foreground="white",
-                            background="#2E5984")
+                            background="#000026")
 
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
@@ -469,8 +471,8 @@ def productSalesTime():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: testshowScatterGraph(querriesGui.productSalesTime(comparing), "Product Sales by Time", addTime=True)
                     
                     )
@@ -480,8 +482,8 @@ def productSalesTime():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: [comparing.append(productOutput.get()), tk.Label(master=displayFrame, text=productOutput.get(), foreground="white", background="#2E5984").place(relx=extrax, rely=(extray + 0.05 * len(comparing)), anchor="center"), productOutput.set("")]
                     )
     citiesLabel.place(relx=.1, rely=.43, anchor='center')
@@ -497,7 +499,7 @@ def countryProductSalesTime():
     titleLabel = tk.Label(master=displayFrame,
                         text="Country Product Sales by Time",
                         foreground="white",
-                        background="#2E5984",
+                        background="#000026",
                         font=('TkDefaultFont', 20))
     titleLabel.place(relx=.5, rely=.05, anchor='center')
     
@@ -507,11 +509,11 @@ def countryProductSalesTime():
     popLabel1 = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
     citiesLabel = tk.Label(master=displayFrame,
                             text="Products to Show:",
                             foreground="white",
-                            background="#2E5984")
+                            background="#000026")
 
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
@@ -522,7 +524,7 @@ def countryProductSalesTime():
     popLabel2 = tk.Label(master=displayFrame,
                         text="Select Country",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
 
     countryOutput = StringVar(displayFrame)
     countryOutput.set(countriesList[0]) # default value
@@ -536,8 +538,8 @@ def countryProductSalesTime():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: testshowScatterGraph(querriesGui.productSalesTimeCountry(comparing, countryEntry.get()), f"Product Sales by Time in {countryEntry.get()}", addTime=True)
                     
                     )
@@ -547,8 +549,8 @@ def countryProductSalesTime():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: [comparing.append(productOutput.get()), tk.Label(master=displayFrame, text=productOutput.get(), foreground="white", background="#2E5984").place(relx=extrax, rely=(extray + 0.05 * len(comparing)), anchor="center"), productOutput.set("")]
                     )
     citiesLabel.place(relx=.1, rely=.43, anchor='center')
@@ -566,7 +568,7 @@ def cityProductSalesTime():
     titleLabel = tk.Label(master=displayFrame,
                         text="City Product Sales by Time",
                         foreground="white",
-                        background="#2E5984",
+                        background="#000026",
                         font=('TkDefaultFont', 20))
     titleLabel.place(relx=.5, rely=.05, anchor='center')
 
@@ -576,11 +578,11 @@ def cityProductSalesTime():
     popLabel1 = tk.Label(master=displayFrame,
                         text="Select Product",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
     citiesLabel = tk.Label(master=displayFrame,
                             text="Products to Show:",
                             foreground="white",
-                            background="#2E5984")
+                            background="#000026")
 
     productOutput = StringVar(displayFrame)
     productOutput.set(productsList[0]) # default value
@@ -591,7 +593,7 @@ def cityProductSalesTime():
     popLabel2 = tk.Label(master=displayFrame,
                         text="Select City",
                         foreground="white",
-                        background="#2E5984")
+                        background="#000026")
 
     cityOutput = StringVar(displayFrame)
     cityOutput.set(citiesList[0]) # default value
@@ -605,8 +607,8 @@ def cityProductSalesTime():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: testshowScatterGraph(querriesGui.productSalesTimeCity(comparing, cityEntry.get()), f"Product Sales by Time in {cityEntry.get()}", addTime=True)
                     
                     )
@@ -616,8 +618,8 @@ def cityProductSalesTime():
                     width=19,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: [comparing.append(productOutput.get()), tk.Label(master=displayFrame, text=productOutput.get(), foreground="white", background="#2E5984").place(relx=extrax, rely=(extray + 0.05 * len(comparing)), anchor="center"), productOutput.set("")]
                     )
     citiesLabel.place(relx=.1, rely=.43, anchor='center')
@@ -813,13 +815,13 @@ def startWindow():
                 master=win,
                 relief=tk.RAISED,
                 borderwidth=3,
-                bg='#2E5984'
+                bg ='#000026'
             )
     displayFrame = tk.Frame(
                     master=win,
                     relief=tk.RAISED,
                     borderwidth=3,
-                    bg='#2E5984'
+                    bg ='#000026'
                             )
 
     buttonFrame.pack(side='left', fill='both', expand=False)
@@ -831,8 +833,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: totalSalesCity()
                     )
 
@@ -842,8 +844,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: totalSalesCountry()
                     )
 
@@ -853,8 +855,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: popItemsCity()
                     )
 
@@ -864,8 +866,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: popItemsCountry()
                     )
 
@@ -875,8 +877,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: totalTopSelling()
                     )
 
@@ -886,8 +888,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: topSellingCountry()
                     )
 
@@ -897,8 +899,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: topSellingCity()
                     )
 
@@ -908,8 +910,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: productPopYear()
                     )
 
@@ -919,8 +921,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: productPopYearCountry()
                     )
 
@@ -930,8 +932,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: productPopYearCity()
                     )
 
@@ -941,8 +943,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: totalSalesTime()
                     )
 
@@ -952,8 +954,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: productSalesTime()
                     )
 
@@ -963,8 +965,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: countryProductSalesTime()
                     )
 
@@ -974,8 +976,8 @@ def startWindow():
                     width=25,
                     height=2,
                     pady=5,
-                    bg="blue",
-                    fg="yellow",
+                    bg="#00beff",
+                    fg="#591277",
                     command= lambda: cityProductSalesTime()
                     )
     plotButton5.pack()
