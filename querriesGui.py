@@ -78,7 +78,6 @@ def productPopYear(prodName):
     spark_df.select(['productName', 'datetime', 'quantity']).where((spark_df.productName.isin(prodName)) & (spark_df.quantity >= quart1) & (spark_df.quantity <= quart3)).groupBy(spark_df.productName, spark_df.datetime.substr(1,2)).agg({'quantity': 'sum'}).sort('productName', 'substring(datetime, 1, 2)').show()
     for i in data:
         info[i[0]].append([str(i[1]), i[2]])
-    print(info)
 
     return info
 
@@ -93,7 +92,6 @@ def productPopYearCountry(prodName, countryName):
         info[i] = []
     for i in data:
         info[i[0]].append([str(i[1]), i[2]])
-    print(info)
 
     return info
 def productPopYearCity(prodName, cityName):
@@ -108,7 +106,6 @@ def productPopYearCity(prodName, cityName):
         info[i] = []
     for i in data:
         info[i[0]].append([str(i[1]), i[2]])
-    print(info)
 
     return info
 
@@ -128,7 +125,6 @@ def productSalesTime(product):
         info[i] = []
     for i in data:
         info[i[0]].append([str(i[1]), i[2]])
-    print(info)
 
     return info
 
@@ -140,7 +136,6 @@ def productSalesTimeCountry(product, country):
         info[i] = []
     for i in data:
         info[i[0]].append([str(i[1]), i[2]])
-    print(info)
 
     return info
 
@@ -152,7 +147,6 @@ def productSalesTimeCity(product, city):
         info[i] = []
     for i in data:
         info[i[0]].append([str(i[1]), i[2]])
-    print(info)
 
     return info
 
