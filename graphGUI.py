@@ -674,7 +674,7 @@ def testshowScatterGraph(queryInput, title, addDate=False, addTime=False):
   
     # creating the Tkinter canvas
     fig.suptitle(title, fontsize=20)
-    fig.legend(loc='upper left')
+    fig.legend(loc="lower left")
 
     canvas = FigureCanvasTkAgg(fig,
                                master = displayFrame)  
