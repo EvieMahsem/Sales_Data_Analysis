@@ -141,7 +141,6 @@ def totalSalesCity():
                     command= lambda: [comparing.append(cityOutput.get()), tk.Label(master=displayFrame, text=cityOutput.get(), foreground="white", background="#2E5984").place(relx=extrax, rely=(extray + 0.05 * len(comparing)), anchor="center"), cityOutput.set("")]
                     )
                     
-    print(comparing)
 
     popLabel.place(relx=.5, rely=.33, anchor='center')
     citiesLabel.place(relx=.1, rely=.43, anchor='center')
